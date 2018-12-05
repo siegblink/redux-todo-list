@@ -1,13 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { clearTodo } from '../actions';
 
-const Todos = ({ todos, clearTodo }) => {
-  const todoLength = todos.length;
+const Todos = props => {
+  // const todoLength = props.todos.length;
+  // const todolist = todoLength ? (
+  //   props.todos.map(todo => {
+  //     return (
+  //       <div className="card-action center" key={todo.id}>
+  //         <span onClick={() => props.clearTodo(todo.id)}>{todo.title}</span>
+  //       </div>
+  //     );
+  //   })
+  // ) : (
+  //   <div className="card-action center">You no longer have todos, yahoo!</div>
+  // );
 
-  const todolist = todoLength ? (
-    todos.map(todo => {
+  const newtodosLength = props.newTodos.todos.length;
+  const newTodoList = newtodosLength ? (
+    props.newTodos.todos.map(newTodo => {
       return (
-        <div className="card-action center" key={todo.id}>
-          <span onClick={() => clearTodo(todo.id)}>{todo.content}</span>
+        <div className="card-action center" key={newTodo.id}>
+          <span onClick={() => props.clearTodo(newTodo.id)}>
+            {newTodo.title}
+          </span>
         </div>
       );
     })
@@ -15,7 +31,17 @@ const Todos = ({ todos, clearTodo }) => {
     <div className="card-action center">You no longer have todos, yahoo!</div>
   );
 
-  return <div className="">{todolist}</div>;
+  return <div>{newTodoList}</div>;
 };
 
-export default Todos;
+const mapStateToProps = state => {
+  return {
+    // todos: state.defaultTodos,
+    newTodos: state.todoList
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { clearTodo }
+)(Todos);
