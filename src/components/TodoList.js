@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTodo, fillInputBox, resetInputBox } from '../actions';
 
 class TodoList extends Component {
-  state = { content: '' };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.addTodo(this.state);
-    this.setState({ content: '' });
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.addTodo(this.props.todos.content);
+    this.props.resetInputBox();
   };
 
-  handleInput = e => {
-    this.setState({ content: e.target.value });
+  handleInput = event => {
+    this.props.fillInputBox(event);
   };
 
   render() {
@@ -20,11 +20,18 @@ class TodoList extends Component {
         <input
           type="text"
           onChange={this.handleInput}
-          value={this.state.content}
+          value={this.props.todos.content}
         />
       </form>
     );
   }
 }
 
-export default TodoList;
+const mapStateToProps = state => {
+  return { todos: state.todoList };
+};
+
+export default connect(
+  mapStateToProps,
+  { addTodo, fillInputBox, resetInputBox }
+)(TodoList);
