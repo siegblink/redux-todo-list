@@ -4,24 +4,25 @@ import { addTodo, fillInputBox, resetInputBox } from '../actions';
 
 class TodoList extends Component {
   handleSubmit = event => {
+    const { todos, addTodo, resetInputBox } = this.props;
+
     event.preventDefault();
-    this.props.addTodo(this.props.todos.content);
-    this.props.resetInputBox();
+    addTodo(todos.content);
+    resetInputBox();
   };
 
   handleInput = event => {
-    this.props.fillInputBox(event);
+    const { fillInputBox } = this.props;
+    fillInputBox(event);
   };
 
   render() {
+    const { todos } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Add todo:</label>
-        <input
-          type="text"
-          onChange={this.handleInput}
-          value={this.props.todos.content}
-        />
+        <input type="text" onChange={this.handleInput} value={todos.content} />
       </form>
     );
   }
