@@ -1,20 +1,9 @@
 // add combineReducers from redux library
 import { combineReducers } from 'redux';
 
-// this is a static reducer that returns default todos
-// const todosReducer = () => {
-//   return [
-//     { title: 'Do 3 sets of push-ups for 20 reps', id: 0 },
-//     { title: 'Drink serious-mass protein shake', id: 1 },
-//     { title: 'Update projects in Github', id: 2 }
-//   ];
-// };
+const state = { todos: [], content: '' };
 
-// this is a dynamic reducer that handles specific actions
-const manageTodoReducer = (
-  todoList = { todos: [], content: '' },
-  action = {}
-) => {
+const manageTodoReducer = (todoList = state, action = {}) => {
   switch (action.type) {
     case 'ADD_TODO': {
       return {
