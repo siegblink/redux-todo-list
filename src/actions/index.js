@@ -4,8 +4,6 @@
 export const addTodo = todo => {
   return { type: 'ADD_TODO', payload: todo };
 };
-<<<<<<< HEAD
-=======
 
 // deletes a todo list
 export const clearTodo = id => {
@@ -16,7 +14,6 @@ export const clearTodo = id => {
 export const fillInputBox = event => {
   return { type: 'FILL_IN_INPUTBOX', payload: event.target.value };
 };
->>>>>>> upstream/master
 
 // clears the value of the input box after the data is submitted
 export const resetInputBox = () => {
